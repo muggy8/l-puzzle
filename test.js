@@ -26,3 +26,19 @@ console.log("--- testing findPossiableNextMoves true ---")
 JSON.stringify(findPossiableNextMoves(true, [[3, 1]]).sort()) === "[[1,0],[1,2]]" ? console.log("pass") : console.warn("fail")
 JSON.stringify(findPossiableNextMoves(true, [[3, 1],[1, 1]]).sort()) === "[[1,0],[1,2]]" ? console.log("pass") : console.warn("fail")
 JSON.stringify(findPossiableNextMoves(true, [[3, 1],[1, 1],[0, 0]]).sort()) === "[[1,0],[1,2],[2,1]]" ? console.log("pass") : console.warn("fail")
+
+console.log("--- testing findSequence to make sure this works ---")
+JSON.stringify(findSequence("", [3, 1], 4).sort()) === `["0424","0426","0484","0486","0624","0626","0684","0686"]` ? console.log("pass") : console.warn("fail")
+JSON.stringify(findSequence("", [3, 1], 3).sort()) === `["042","048","062","068"]` ? console.log("pass") : console.warn("fail")
+JSON.stringify(findSequence("", [3, 1], 2).sort()) === `["04","06"]` ? console.log("pass") : console.warn("fail")
+
+console.log("--- testing secretSequenceCounter based on findSequence ---")
+for(let i = 2; i < 17; i++){
+	let seqLen, counterLen
+	if (seqLen = findSequence("", [3, 1], i).length === counterLen = secretSequenceCounter(i)){
+		console.log("pass", i)
+	}
+	else {
+		console.warn("fail", i, seqLen, counterLen)
+	}
+}
