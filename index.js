@@ -88,12 +88,16 @@ function findSequence(currentSequence, currentPosition, targetLength){
 	... when n gets too big recursive solution isn't going to work but this does look like a combinatorics question aka how many possiable moves there are for the current posisitons and stuff and since we dont really need to find all the variations and we just need to find the length, we can maybe just multiply together a sequence of numbers to find the answer? all we'll have to do now is just generate that sequence of number to multiply togehter... in any case food first :3
 */
 
-function findPossiableNextMoves(bigL, currentMoves){
-	let possiableNextMoves = currentMoves.reduce(function(moveSum, knownCurrentMove){
+function makeNextMoves(bigL, currentMoves){
+	return currentMoves.reduce(function(moveSum, knownCurrentMove){
 		let nextMoves = viableNextMoves(bigL, knownCurrentMove)
 		Array.prototype.push.apply(moveSum, nextMoves)
 		return moveSum
 	}, [])
+}
+
+function findPossiableNextMoves(bigL, currentMoves){
+	let possiableNextMoves = makeNextMoves(bigL, currentMoves)
 	let memory = {}
 	return possiableNextMoves.filter(function(move){
 		if (memory[JSON.stringify(move)]){
@@ -104,15 +108,13 @@ function findPossiableNextMoves(bigL, currentMoves){
 }
 
 function secretSequenceCounter(targetLength){
-	let currentValidConfig = [[3,1]]
-	let numbersToMultiply = [1]
-	while (numbersToMultiply.length < targetLength){
-		let bigL = isMoveBigL(numbersToMultiply.length - 1)
-		currentValidConfig = findPossiableNextMoves(bigL, currentValidConfig)
-		numbersToMultiply.push(currentValidConfig.length)
+	let currentEndingSequence = [[3,1]]
+	let counter = 0
+	// let debugList = [currentValidConfig]
+	while (counter < targetLength){
+		let bigL = isMoveBigL(counter)
+		currentEndingSequence = makeNextMoves(bigL, currentEndingSequence)
+		counter++
 	}
-	console.log(numbersToMultiply)
-	return numbersToMultiply.reduce(function(product, optionsCount){
-		return product * optionsCount
-	})
+	return currentEndingSequence.length
 }
