@@ -21,3 +21,8 @@ JSON.stringify(findLMoves([1, 1], bigLMoves).sort()) === "[]" ? console.log("pas
 JSON.stringify(findLMoves([2, 2], bigLMoves).sort()) === "[[0,1],[1,0]]" ? console.log("pass") : console.warn("fail")
 JSON.stringify(findLMoves([0, 0], bigLMoves).sort()) === "[[1,2],[2,1]]" ? console.log("pass") : console.warn("fail")
 JSON.stringify(findLMoves([2, 1], bigLMoves).sort()) === "[[0,0],[0,2]]" ? console.log("pass") : console.warn("fail")
+
+console.log("--- testing findPossiableNextMoves true ---")
+JSON.stringify(findPossiableNextMoves(true, [[3, 1]]).sort()) === "[[1,0],[1,2]]" ? console.log("pass") : console.warn("fail")
+JSON.stringify(findPossiableNextMoves(true, [[3, 1],[1, 1]]).sort()) === "[[1,0],[1,2]]" ? console.log("pass") : console.warn("fail")
+JSON.stringify(findPossiableNextMoves(true, [[3, 1],[1, 1],[0, 0]]).sort()) === "[[1,0],[1,2],[2,1]]" ? console.log("pass") : console.warn("fail")

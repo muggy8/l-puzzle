@@ -79,3 +79,18 @@ function findSequence(currentSequence, currentPosition, targetLength){
 /*
 	... when n gets too big recursive solution isn't going to work but this does look like a combinatorics question aka how many possiable moves there are for the current posisitons and stuff and since we dont really need to find all the variations and we just need to find the length, we can maybe just multiply together a sequence of numbers to find the answer? all we'll have to do now is just generate that sequence of number to multiply togehter... in any case food first :3
 */
+
+function findPossiableNextMoves(bigL, currentMoves){
+	let possiableNextMoves = currentMoves.reduce(function(moveSum, knownCurrentMove){
+		let nextMoves = viableNextMoves(bigL, knownCurrentMove)
+		Array.prototype.push.apply(moveSum, nextMoves)
+		return moveSum
+	}, [])
+	let memory = {}
+	return possiableNextMoves.filter(function(move){
+		if (memory[JSON.stringify(move)]){
+			return false
+		}
+		return memory[JSON.stringify(move)] = true
+	})
+}
