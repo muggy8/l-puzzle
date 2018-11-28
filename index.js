@@ -6,13 +6,17 @@ const keypad = [
 ]
 
 function findSequence(currentSequence, currentPosition, targetLength){
+	if (currentSequence.length === targetLength){
+		return
+	}
 	var bigL = false
-	if (currentPosition % 3 === 0){
+	if (currentSequence.length % 3 === 0){
 		bigL = true
 	}
 
 	currentSequence += keypad[currentPosition[0]][currentPosition[1]]
 	console.log(bigL, currentSequence)
+	findSequence(currentSequence, currentPosition, targetLength)
 }
 
 findSequence("", [3, 1], 4)
