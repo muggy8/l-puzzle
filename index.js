@@ -105,14 +105,13 @@ function findPossiableNextMoves(bigL, currentMoves){
 
 function secretSequenceCounter(targetLength){
 	let currentValidConfig = [[3,1]]
-	let currentLength = 0
-	let numbersToMultiply = []
-	while (currentLength < targetLength){
-		let bigL = isMoveBigL(currentLength)
+	let numbersToMultiply = [1]
+	while (numbersToMultiply.length < targetLength){
+		let bigL = isMoveBigL(numbersToMultiply.length - 1)
 		currentValidConfig = findPossiableNextMoves(bigL, currentValidConfig)
 		numbersToMultiply.push(currentValidConfig.length)
-		currentLength++
 	}
+	console.log(numbersToMultiply)
 	return numbersToMultiply.reduce(function(product, optionsCount){
 		return product * optionsCount
 	})
