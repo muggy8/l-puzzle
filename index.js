@@ -23,7 +23,7 @@ const littleLMoves = [
 	[-1,1],
 	[-1,-1],
 ]
-const bigMoves = [
+const bigLMoves = [
 	[1,2],
 	[1,-2],
 	[-1,2],
