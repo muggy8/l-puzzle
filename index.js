@@ -23,8 +23,18 @@ const littleLMoves = [
 	[-1,1],
 	[-1,-1],
 ]
-function findLittleLMoves(currentPosition){
-	let viableMoves = littleLMoves.map(function(position){
+const bigMoves = [
+	[1,2],
+	[1,-2],
+	[-1,2],
+	[-1,-2],
+	[2,1],
+	[2,-1],
+	[-2,1],
+	[-2,-1],
+]
+function findLMoves(currentPosition, possiableMoves){
+	let viableMoves = possiableMoves.map(function(position){
 		var newPosition = [position[0] + currentPosition[0], position[1] + currentPosition[1]]
 
 		if (newPosition[0] < 0 || newPosition[0] > 3 || newPosition[1] < 0 || newPosition[1] > 2 ){ // early break point to get out of anything that isn't within the bounds
