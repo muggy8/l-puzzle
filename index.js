@@ -5,18 +5,23 @@ const keypad = [
 	["*",0,"#"],
 ]
 
+function isMoveBigL(lengthOfCurrentSequence){
+	var isBigL = false
+	if (lengthOfCurrentSequence % 3 === 0){
+		isBigL = true
+	}
+	return isBigL
+}
+
 function findSequence(currentSequence, currentPosition, targetLength){
 	if (currentSequence.length === targetLength){
 		return
 	}
-	var bigL = false
-	if (currentSequence.length % 3 === 0){
-		bigL = true
-	}
+	var bigL = isMoveBigL(currentSequence.length)
 
 	currentSequence += keypad[currentPosition[0]][currentPosition[1]]
 	console.log(bigL, currentSequence)
 	findSequence(currentSequence, currentPosition, targetLength)
 }
 
-findSequence("", [3, 1], 4)
+findSequence("", [3, 1], 7)
