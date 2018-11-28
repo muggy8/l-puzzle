@@ -30,11 +30,13 @@ function findLittleLMoves(currentPosition){
 		if (newPosition[0] < 0 || newPosition[0] > 3 || newPosition[1] < 0 || newPosition[1] > 2 ){ // early break point to get out of anything that isn't within the bounds
 			return
 		}
+		if (typeof keypad[newPosition[0]][newPosition[1]] !== "number"){
+			return
+		}
 		return newPosition
 	}).filter(function(position){
 		return !!position // only keep the non null options
 	})
-	console.log(currentPosition, viableMoves)
 	return viableMoves
 }
 

@@ -12,3 +12,4 @@ JSON.stringify(findLittleLMoves([0, 1]).sort()) === "[[1,0],[1,2]]" ? console.lo
 JSON.stringify(findLittleLMoves([1, 1]).sort()) === "[[0,0],[0,2],[2,0],[2,2]]" ? console.log("pass") : console.warn("fail")
 JSON.stringify(findLittleLMoves([2, 2]).sort()) === "[[1,1],[3,1]]" ? console.log("pass") : console.warn("fail")
 JSON.stringify(findLittleLMoves([0, 0]).sort()) === "[[1,1]]" ? console.log("pass") : console.warn("fail")
+JSON.stringify(findLittleLMoves([2, 1]).sort()) === "[[1,0],[1,2]]" ? console.log("pass") : console.warn("fail")
