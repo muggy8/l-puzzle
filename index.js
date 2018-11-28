@@ -107,6 +107,7 @@ function findPossiableNextMoves(bigL, currentMoves){
 	})
 }
 
+/*
 function secretSequenceCounter(targetLength){
 	let currentEndingSequence = [[3,1]]
 	let counter = 0
@@ -117,6 +118,28 @@ function secretSequenceCounter(targetLength){
 		counter++
 	}
 	return currentEndingSequence.length
+}
+*/
+
+function secretSequenceCounter(targetLength){
+	let currentVariationsCount = 1 // starts with a 0
+	let currentMoves = [[3, 1]]
+	let offsettedTarget = targetLength - 1
+	for(let counter = 0; counter < offsettedTarget; counter++){
+		let bigL = isMoveBigL(counter)
+		let accumulatedMoves = {}
+		let newPossiableMoves = 0
+		for(let currentMove of currentMoves){
+			let nextStepMoves = viableNextMoves(bigL, currentMove)
+			newPossiableMoves += nextStepMoves.length * currentVariationsCount
+			nextStepMoves.forEach(function(move){
+				accumulatedMoves[JSON.stringify(move)] = move
+			})
+		}
+		currentVariationsCount = newPossiableMoves
+		currentMoves = Object.getOwnPropertyNames(accumulatedMoves).map(key=>accumulatedMoves[key])
+	}
+	return currentVariationsCount
 }
 
 typeof module !== "undefined" && (module.exports = {
