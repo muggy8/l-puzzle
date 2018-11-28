@@ -50,10 +50,6 @@ function findLMoves(currentPosition, possiableMoves){
 	return viableMoves
 }
 
-function findBigLMoves(currentPosition){
-
-}
-
 function findSequence(currentSequence, currentPosition, targetLength){
 	if (currentSequence.length === targetLength){
 		return
