@@ -94,3 +94,18 @@ function findPossiableNextMoves(bigL, currentMoves){
 		return memory[JSON.stringify(move)] = true
 	})
 }
+
+function secretSequenceCounter(targetLength){
+	let currentValidConfig = [[3,1]]
+	let currentLength = 0
+	let numbersToMultiply = []
+	while (currentLength < targetLength){
+		let bigL = isMoveBigL(currentLength)
+		currentValidConfig = findPossiableNextMoves(bigL, currentValidConfig)
+		numbersToMultiply.push(currentValidConfig.length)
+		currentLength++
+	}
+	return numbersToMultiply.reduce(function(product, optionsCount){
+		return product * optionsCount
+	})
+}
