@@ -65,11 +65,19 @@ function findSequence(currentSequence, currentPosition, targetLength){
 	let bigL = isMoveBigL(currentSequence.length)
 
 	currentSequence += keypad[currentPosition[0]][currentPosition[1]]
-	return viableNextMoves(bigL, currentPosition).reduce(function(sum, nextPositionToCheck){
+	let allGeneratedNextMoves = viableNextMoves(bigL, currentPosition).reduce(function(sum, nextPositionToCheck){
 		let foundSequence = findSequence(currentSequence, nextPositionToCheck, targetLength)
 		Array.prototype.push.apply(sum, foundSequence)
 		return sum
 	}, [])
+
+	let memory = {}
+	return allGeneratedNextMoves.filter(function(combination){
+		if (memory[combination]){
+			return false
+		}
+		return memory[combination] = true
+	})
 	// findSequence(currentSequence, currentPosition, targetLength)
 }
 
