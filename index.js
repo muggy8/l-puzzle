@@ -74,3 +74,8 @@ function findSequence(currentSequence, currentPosition, targetLength){
 }
 
 // findSequence("", [3, 1], 7)
+
+
+/*
+	... when n gets too big recursive solution isn't going to work but this does look like a combinatorics question aka how many possiable moves there are for the current posisitons and stuff and since we dont really need to find all the variations and we just need to find the length, we can maybe just multiply together a sequence of numbers to find the answer? all we'll have to do now is just generate that sequence of number to multiply togehter... in any case food first :3
+*/
