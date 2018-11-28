@@ -111,10 +111,12 @@ function secretSequenceCounter(targetLength){
 	let currentEndingSequence = [[3,1]]
 	let counter = 0
 	// let debugList = [currentValidConfig]
-	while (counter < targetLength){
+	while (counter < targetLength - 1){
 		let bigL = isMoveBigL(counter)
 		currentEndingSequence = makeNextMoves(bigL, currentEndingSequence)
 		counter++
 	}
 	return currentEndingSequence.length
 }
+
+typeof module !== "undefined" && (module.exports = secretSequenceCounter)
