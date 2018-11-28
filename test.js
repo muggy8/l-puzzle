@@ -35,7 +35,7 @@ JSON.stringify(findSequence("", [3, 1], 2).sort()) === `["04","06"]` ? console.l
 console.log("--- testing secretSequenceCounter based on findSequence ---")
 for(let i = 2; i < 17; i++){
 	let seqLen, counterLen
-	if (seqLen = findSequence("", [3, 1], i).length === counterLen = secretSequenceCounter(i)){
+	if ((seqLen = findSequence("", [3, 1], i).length) === (counterLen = secretSequenceCounter(i))){
 		console.log("pass", i)
 	}
 	else {
