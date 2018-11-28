@@ -36,4 +36,4 @@ function findSequence(currentSequence, currentPosition, targetLength){
 	// findSequence(currentSequence, currentPosition, targetLength)
 }
 
-findSequence("", [3, 1], 7)
+// findSequence("", [3, 1], 7)
