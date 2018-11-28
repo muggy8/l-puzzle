@@ -119,4 +119,12 @@ function secretSequenceCounter(targetLength){
 	return currentEndingSequence.length
 }
 
-typeof module !== "undefined" && (module.exports = secretSequenceCounter)
+typeof module !== "undefined" && (module.exports = {
+	secretSequenceCounter,
+	findSequence,
+	findPossiableNextMoves,
+	findLMoves,
+	isMoveBigL,
+	littleLMoves,
+	bigLMoves
+})
