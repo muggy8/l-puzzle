@@ -13,6 +13,18 @@ function isMoveBigL(lengthOfCurrentSequence){
 	return isBigL
 }
 
+function viableNextMoves(bigL, currentPosition){
+
+}
+
+function findLittleLMoves(currentPosition){
+
+}
+
+function findBigLMoves(currentPosition){
+
+}
+
 function findSequence(currentSequence, currentPosition, targetLength){
 	if (currentSequence.length === targetLength){
 		return
@@ -20,8 +32,8 @@ function findSequence(currentSequence, currentPosition, targetLength){
 	var bigL = isMoveBigL(currentSequence.length)
 
 	currentSequence += keypad[currentPosition[0]][currentPosition[1]]
-	console.log(bigL, currentSequence)
-	findSequence(currentSequence, currentPosition, targetLength)
+	// console.log(bigL, currentSequence)
+	// findSequence(currentSequence, currentPosition, targetLength)
 }
 
 findSequence("", [3, 1], 7)
