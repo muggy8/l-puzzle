@@ -1,4 +1,10 @@
-const fn = require("./index.js").secretSequenceCounter
+let fn
+if (typeof require !== "undefined"){
+	fn = require("./index.js").secretSequenceCounter
+}
+else {
+	fn = secretSequenceCounter
+}
 console.log("n = 7 =>", fn(7))
 console.log("n = 20 =>", fn(20))
 console.log("n = 30 =>", fn(30))
