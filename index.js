@@ -126,14 +126,32 @@ function secretSequenceCounter(targetLength){
 	currentMoves[0].count = 0
 	for(let counter = 0; counter < offsettedTarget; counter++){
 		let bigL = isMoveBigL(counter)
-		let allPossiableNextMoves = currentMoves.map(function(currentMove){
+		let allPossiableNextMoves = currentMoves.reduce(function(possibilites, currentMove){
 			let foundNextMoves = viableNextMoves(bigL, currentMove)
-			foundNextMoves.parentCount = currentMove.count
-			return foundNextMoves
+			foundNextMoves.forEach(move=>move.parentCount = currentMove.count)
+			Array.prototype.push.apply(possibilites, foundNextMoves)
+			//foundNextMoves.parentCount = currentMove.count
+			//return foundNextMoves
+			return possibilites
+		}, [])
+		let uniqueMoves = allPossiableNextMoves.reduce(function(unique, move){
+			if (!unique[JSON.stringify(move)]){
+				unique[JSON.stringify(move)] = {
+					coord: move,
+					count: 0
+				}
+			}
+			unique[JSON.stringify(move)].count += move.parentCount
+			return unique
+		}, {})
+		currentMoves = Object.getOwnPropertyNames(uniqueMoves).map(function(key){
+			let move = uniqueMoves[key].coord
+			move.count = uniqueMoves[key].count
 		})
-		//allPossiableNextMoves…
 	}
-	return currentVariationsCount
+	return currentMoves.reduce(function(sum, move){
+		return sum + move.count
+	}, 0)
 }
 
 typeof module !== "undefined" && (module.exports = {
