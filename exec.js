@@ -7,6 +7,6 @@ else {
 }
 
 for(let i = 1; i <= 10; i++){
-	console.log(i, "=>", fn(i).toString())
+	console.log(i + " => " + fn(i).toString())
 }
-console.log(100, "=>", fn(100).toString())
+console.log(100 + " => " + fn(100).toString())
