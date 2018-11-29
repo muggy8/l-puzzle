@@ -122,22 +122,16 @@ function secretSequenceCounter(targetLength){
 */
 
 function secretSequenceCounter(targetLength){
-	let currentVariationsCount = 1 // starts with a 0
 	let currentMoves = [[3, 1]]
-	let offsettedTarget = targetLength - 1
+	currentMoves[0].count = 0
 	for(let counter = 0; counter < offsettedTarget; counter++){
 		let bigL = isMoveBigL(counter)
-		let accumulatedMoves = {}
-		let newPossiableMoves = 0
-		for(let currentMove of currentMoves){
-			let nextStepMoves = viableNextMoves(bigL, currentMove)
-			newPossiableMoves += nextStepMoves.length * currentVariationsCount
-			nextStepMoves.forEach(function(move){
-				accumulatedMoves[JSON.stringify(move)] = move
-			})
-		}
-		currentVariationsCount = newPossiableMoves
-		currentMoves = Object.getOwnPropertyNames(accumulatedMoves).map(key=>accumulatedMoves[key])
+		let allPossiableNextMoves = currentMoves.map(function(currentMove){
+			let foundNextMoves = viableNextMoves(bigL, currentMove)
+			foundNextMoves.parentCount = currentMove.count
+			return foundNextMoves
+		})
+		//allPossiableNextMoves…
 	}
 	return currentVariationsCount
 }
