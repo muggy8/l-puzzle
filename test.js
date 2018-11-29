@@ -45,7 +45,7 @@ with(imported){
 			console.log("pass", i)
 		}
 		else {
-			console.warn("fail", i, seqLen, counterLen)
+			console.warn("fail?", i, seqLen, counterLen)
 		}
 	}
 }
