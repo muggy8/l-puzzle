@@ -121,40 +121,45 @@ function secretSequenceCounter(targetLength){
 }
 */
 
-function secretSequenceCounter(targetLength){
-	let currentMoves = [[3, 1]]
-	currentMoves[0].count = 1
-	let offsettedTarget = targetLength - 1
-	for(let counter = 0; counter < offsettedTarget; counter++){
-		let bigL = isMoveBigL(counter)
-		let allPossiableNextMoves = currentMoves.reduce(function(possibilites, currentMove){
-			let foundNextMoves = viableNextMoves(bigL, currentMove)
-			foundNextMoves.forEach(move=>move.parentCount = currentMove.count)
-			Array.prototype.push.apply(possibilites, foundNextMoves)
-			//foundNextMoves.parentCount = currentMove.count
-			//return foundNextMoves
-			return possibilites
-		}, [])
-		let uniqueMoves = allPossiableNextMoves.reduce(function(unique, move){
-			if (!unique[JSON.stringify(move)]){
-				unique[JSON.stringify(move)] = {
-					coord: move,
-					count: 0
+let secretSequenceCounterDependencies = {}
+if (typeof require !== 'undefined'){
+	secretSequenceCounterDependencies.bigInt = require("big-integer")
+}
+with(secretSequenceCounterDependencies){
+	function secretSequenceCounter(targetLength){
+		let currentMoves = [[3, 1]]
+		currentMoves[0].count = bigInt(1)
+		let offsettedTarget = targetLength - 1
+		for(let counter = 0; counter < offsettedTarget; counter++){
+			let bigL = isMoveBigL(counter)
+			let allPossiableNextMoves = currentMoves.reduce(function(possibilites, currentMove){
+				let foundNextMoves = viableNextMoves(bigL, currentMove)
+				foundNextMoves.forEach(move=>move.parentCount = currentMove.count)
+				Array.prototype.push.apply(possibilites, foundNextMoves)
+				return possibilites
+			}, [])
+			let uniqueMoves = allPossiableNextMoves.reduce(function(unique, move){
+				let key = JSON.stringify(move)
+				if (!unique[key]){
+					unique[key] = {
+						coord: move,
+						count: bigInt(0)
+					}
 				}
-			}
-			unique[JSON.stringify(move)].count += move.parentCount
-			return unique
-		}, {})
-		// console.log(allPossiableNextMoves, uniqueMoves)
-		currentMoves = Object.getOwnPropertyNames(uniqueMoves).map(function(key){
-			let move = uniqueMoves[key].coord
-			move.count = uniqueMoves[key].count
-			return move
-		})
+				unique[key].count = unique[key].count.plus(move.parentCount)
+				return unique
+			}, {})
+			// console.log(allPossiableNextMoves, uniqueMoves)
+			currentMoves = Object.getOwnPropertyNames(uniqueMoves).map(function(key){
+				let move = uniqueMoves[key].coord
+				move.count = uniqueMoves[key].count
+				return move
+			})
+		}
+		return currentMoves.reduce(function(sum, move){
+			return sum.plus(move.count)
+		}, bigInt(0))
 	}
-	return currentMoves.reduce(function(sum, move){
-		return sum + move.count
-	}, 0)
 }
 
 typeof module !== "undefined" && (module.exports = {

@@ -41,11 +41,16 @@ with(imported){
 	console.log("--- testing secretSequenceCounter based on findSequence ---")
 	for(let i = 2; i < 17; i++){
 		let seqLen, counterLen
-		if ((seqLen = findSequence("", [3, 1], i).length) === (counterLen = secretSequenceCounter(i))){
+		if ((seqLen = findSequence("", [3, 1], i).length) === (counterLen = secretSequenceCounter(i).toJSNumber())){
 			console.log("pass", i)
 		}
 		else {
 			console.warn("fail?", i, seqLen, counterLen)
 		}
 	}
+
+	for(let i = 1; i <= 10; i++){
+		console.log(i, "=>", secretSequenceCounter(i))
+	}
+	console.log(100, "=>", secretSequenceCounter(100))
 }
